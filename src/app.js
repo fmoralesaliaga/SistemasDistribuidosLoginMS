@@ -1,9 +1,17 @@
 const express = require('express');
 const authRoutes = require('./routes');
 require('dotenv').config();
+const cors = require('cors');
+
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
 const app = express();
 app.use(express.json()); // Habilita el middleware para parsear JSON en el cuerpo de las solicitudes.
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
 // Registrar las rutas de autenticación bajo el prefijo '/api'.
 app.use('/api', authRoutes);
